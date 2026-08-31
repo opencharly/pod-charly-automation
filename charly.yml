@@ -1,7 +1,7 @@
 version: 2026.232.0520
 charly-automation:
     candy:
-        version: 2026.242.1845
+        version: 2026.243.0100
         description: |-
             Concept candy owning the charly-automation skills (tmux/alias/udev/encryption/sidecar/…). Owns its family's `skill:` kind entities (sibling nodes in this file) — the
             the plugins→candies migration; candy/plugin-marketplace regenerates the marketplace
@@ -890,9 +890,9 @@ openclaw-deploy-skill:
               candy:
                 base: fedora
                 candy:
-                  - '@github.com/opencharly/layer-agent-forwarding:v2026.238.1851'
-                  - '@github.com/opencharly/layer-openclaw-full:v2026.238.2103'
-                  - '@github.com/opencharly/layer-sway-desktop:v2026.242.1839'
+                  - '@github.com/opencharly/layer-agent-forwarding:v2026.243.0408'
+                  - '@github.com/opencharly/layer-openclaw-full:v2026.243.0818'
+                  - '@github.com/opencharly/layer-sway-desktop:v2026.243.0831'
                   - '@github.com/opencharly/pod-dbus:v2026.235.2115'
                   - charly
             ```
