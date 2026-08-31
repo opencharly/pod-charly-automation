@@ -894,10 +894,10 @@ openclaw-deploy-skill:
               candy:
                 base: fedora
                 candy:
-                  - '@github.com/opencharly/layer-agent-forwarding:vTAG'
-                  - '@github.com/opencharly/layer-openclaw-full:vTAG'
-                  - '@github.com/opencharly/layer-sway-desktop:vTAG'
-                  - '@github.com/opencharly/pod-dbus:vTAG'
+                  - '@github.com/opencharly/layer-agent-forwarding'
+                  - '@github.com/opencharly/layer-openclaw-full'
+                  - '@github.com/opencharly/layer-sway-desktop'
+                  - '@github.com/opencharly/pod-dbus'
                   - charly
             ```
 
