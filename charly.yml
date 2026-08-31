@@ -23,7 +23,8 @@ agent-skill:
         family: automation
         owner: charly-automation
         description: |-
-            Operate and diagnose Charly's daemon-free agent control plane, including sessions, runs, terminal channels, Pi native/orchestrator/TUI modes, tmux compatibility, federation, generic local/deployment/SSH/gRPC routes, transient Charly endpoint replication, incidents, RCA, and recovery. Use whenever a task invokes or modifies `charly agent`, `charly tui`, `charly tmux`, agent MCP tools, or agent target routing.
+            Operate and diagnose Charly's daemon-free agent control plane — sessions, runs, terminal channels, Pi native/orchestrator/TUI modes, tmux compatibility, federation, generic local/deployment/SSH/gRPC routes, transient endpoint replication, incidents, RCA, recovery. Use whenever a task invokes or modifies `charly agent`, `charly tui`, `charly tmux`, agent MCP tools, or agent target routing.
+
         content: |
             # Charly agent control
 
@@ -114,7 +115,8 @@ alias-skill:
         family: automation
         owner: charly-automation
         description: |-
-            MUST be invoked before any work involving: host command aliases, charly alias add/remove/install/uninstall, or wrapper scripts that run inside containers.
+            Host command aliases, `charly alias add/remove/install/uninstall`, or wrapper scripts that run inside containers.
+
         content: |
             # Alias - Command Aliases
 
@@ -271,7 +273,8 @@ enc-skill:
         family: automation
         owner: charly-automation
         description: |-
-            Topic skill for encrypted storage through `charly config`. MUST be invoked for gocryptfs, the `--encrypt` and encrypted-volume flags, config mount/unmount/status/passwd, or Charly encrypted-volume systemd units.
+            Encrypted storage through `charly config` — gocryptfs, the `--encrypt` and encrypted-volume flags, config mount/unmount/status/passwd, or Charly encrypted-volume systemd units.
+
         content: |
             # Enc - Encrypted Storage
 
@@ -834,7 +837,8 @@ openclaw-deploy-skill:
         family: automation
         owner: charly-automation
         description: |-
-            Topic skill (no dedicated `charly openclaw` command — the surface is candy composition + box deployment). MUST be invoked before any work involving: OpenClaw gateway configuration, model auth, browser integration, channel setup, or any box composing `openclaw-*` candies (`openclaw`, `openclaw-full`, or a custom box composing `openclaw`/`openclaw-full` + `sway-desktop`).
+            OpenClaw gateway configuration, model auth, browser integration, channel setup, or any box composing `openclaw-*` candies (`openclaw`, `openclaw-full`, or a custom box composing openclaw + sway-desktop). No dedicated `charly openclaw` command — the surface is candy composition + box deployment.
+
         content: |
             # OpenClaw - AI Gateway Configuration
 
@@ -1275,7 +1279,8 @@ sidecar-skill:
         family: automation
         owner: charly-automation
         description: |-
-            Topic skill for sidecars configured through `charly config` and `charly.yml`. MUST be invoked for sidecar containers, pod networking, Tailscale exit nodes, sidecar flags, or `env_accept` and `env_require` routing.
+            Sidecars configured through `charly config` and `charly.yml` — sidecar containers, pod networking, Tailscale exit nodes, sidecar flags, or `env_accept`/`env_require` routing.
+
         content: |
             # Sidecar — Deploy-Time Pod Composition
 
@@ -1575,9 +1580,8 @@ tmux-skill:
         family: automation
         owner: charly-automation
         description: |-
-            Typed persistent terminal and terminal-agent sessions backed by isolated tmux control-mode servers.
-            Use for local, deployment, SSH, gRPC, nested, detached, reattached, TTY, snapshot, transcript,
-            literal-input, paste, key, resize, signal, cleanup, incident, and RCA workflows.
+            Typed persistent terminal and terminal-agent sessions backed by isolated tmux control-mode servers — local, deployment, SSH, gRPC, nested, detached, reattached, TTY, snapshot, transcript, literal-input, paste, key, resize, signal, cleanup, incident, RCA workflows.
+
         content: |
             # Typed tmux terminal provider
 
@@ -1675,7 +1679,8 @@ udev-skill:
         family: automation
         owner: charly-automation
         description: |-
-            MUST be invoked before any work involving: GPU device access rules, charly udev commands, udev rule management, or container GPU troubleshooting.
+            GPU device access rules, `charly udev` commands, udev rule management, or container GPU troubleshooting.
+
         content: |
             # Udev - GPU Device Access Rules
 
@@ -1776,6 +1781,7 @@ agent-control-operator-skill:
         model: inherit
         description: |-
             Operates and diagnoses Charly agent, Pi, tmux, TUI, federation, generic target transport, endpoint replication, incident, RCA, and recovery workflows using Charly commands and evidence-first rules.
+
         content: |
             You are the Charly Agent Control Operator.
 
