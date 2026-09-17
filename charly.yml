@@ -24,6 +24,8 @@ agent-skill:
         owner: charly-automation
         description: |-
             Operate and diagnose Charly's daemon-free agent control plane — sessions, runs, terminal channels, Pi native/orchestrator/TUI modes, tmux compatibility, federation, generic local/deployment/SSH/gRPC routes, transient endpoint replication, incidents, RCA, recovery. Use whenever a task invokes or modifies `charly agent`, `charly tui`, `charly tmux`, agent MCP tools, or agent target routing.
+        triggers:
+            - "`charly agent` / agent control plane / sessions / runs / terminal channels / `charly tui` / MCP routing / agent target routing"
 
         content: |
             # Charly agent control
@@ -116,6 +118,8 @@ alias-skill:
         owner: charly-automation
         description: |-
             Host command aliases, `charly alias add/remove/install/uninstall`, or wrapper scripts that run inside containers.
+        triggers:
+            - "host command alias / `charly alias` / wrapper script in a container"
 
         content: |
             # Alias - Command Aliases
