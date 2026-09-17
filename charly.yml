@@ -278,6 +278,8 @@ enc-skill:
         owner: charly-automation
         description: |-
             Encrypted storage through `charly config` — gocryptfs, the `--encrypt` and encrypted-volume flags, config mount/unmount/status/passwd, or Charly encrypted-volume systemd units.
+        triggers:
+            - "`charly config` encrypted volumes / gocryptfs / the `--encrypt` flag / config mount-unmount-status-passwd"
 
         content: |
             # Enc - Encrypted Storage
@@ -842,6 +844,8 @@ openclaw-deploy-skill:
         owner: charly-automation
         description: |-
             OpenClaw gateway configuration, model auth, browser integration, channel setup, or any box composing `openclaw-*` candies (`openclaw`, `openclaw-full`, or a custom box composing openclaw + sway-desktop). No dedicated `charly openclaw` command — the surface is candy composition + box deployment.
+        triggers:
+            - "OpenClaw gateway / `openclaw-*` candies / model auth / browser integration / channel setup"
 
         content: |
             # OpenClaw - AI Gateway Configuration
@@ -1295,6 +1299,8 @@ sidecar-skill:
         owner: charly-automation
         description: |-
             Sidecars configured through `charly config` and `charly.yml` — sidecar containers, pod networking, Tailscale exit nodes, sidecar flags, or `env_accept`/`env_require` routing.
+        triggers:
+            - "sidecars via `charly config` / Tailscale exit nodes / `env_accept` / `env_require` / pod networking"
 
         content: |
             # Sidecar — Deploy-Time Pod Composition
@@ -1596,6 +1602,8 @@ tmux-skill:
         owner: charly-automation
         description: |-
             Typed persistent terminal and terminal-agent sessions backed by isolated tmux control-mode servers — local, deployment, SSH, gRPC, nested, detached, reattached, TTY, snapshot, transcript, literal-input, paste, key, resize, signal, cleanup, incident, RCA workflows.
+        triggers:
+            - "`charly tmux` sessions / terminal channels / snapshot / transcript / detached-reattach / gRPC terminal"
 
         content: |
             # Typed tmux terminal provider
@@ -1695,6 +1703,8 @@ udev-skill:
         owner: charly-automation
         description: |-
             GPU device access rules, `charly udev` commands, udev rule management, or container GPU troubleshooting.
+        triggers:
+            - "`charly udev` / GPU device access rules / container GPU troubleshooting"
 
         content: |
             # Udev - GPU Device Access Rules
@@ -1827,6 +1837,8 @@ crabbox-deploy-skill:
             broker-backed check-verb methods), or any box composing the crabbox
             candies. No dedicated `charly crabbox` command — the surface is candy
             composition + box deployment.
+        triggers:
+            - "crabbox CLI / local coordinator / remote-execution broker / composing the crabbox candies"
 
         content: |
             # Crabbox - Remote Test Execution, Local Control Plane
