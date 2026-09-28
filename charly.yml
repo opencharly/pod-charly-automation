@@ -1,7 +1,5 @@
-version: 2026.240.1943
 charly-automation:
     candy:
-        version: 2026.246.0100
         description: |-
             Concept candy owning the charly-automation skills (tmux/alias/udev/encryption/sidecar/…). Owns its family's `skill:` kind entities (sibling nodes in this file) — the
             the plugins→candies migration; candy/plugin-marketplace regenerates the marketplace
