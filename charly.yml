@@ -893,19 +893,18 @@ openclaw-deploy-skill:
 
             ### Box
 
-            The OpenClaw family owns this box: `opencharly/layer-openclaw` provides `box/openclaw` (gateway plus desktop composition) and its R10 witness. The snippet below shows its shape — import the family and deploy its box rather than hand-assembling candies:
+            The OpenClaw family owns this box: `opencharly/layer-openclaw` provides `box/openclaw`, a **headless** gateway box (no desktop, no browser, no tool bundle) composing exactly two candies — the gateway layer and the out-of-process `openclaw:` check verb. Import the family and deploy its box rather than hand-assembling the candies yourself:
 
             ```yaml
             openclaw:
               candy:
-                base: fedora
+                base: cachyos.cachyos
                 candy:
-                  - '@github.com/opencharly/layer-agent-forwarding'
-                  - '@github.com/opencharly/layer-openclaw'
-                  - '@github.com/opencharly/layer-sway-desktop'
-                  - '@github.com/opencharly/pod-dbus'
-                  - charly
+                  - openclaw
+                  - '@github.com/opencharly/plugin-openclaw/candy/plugin-openclaw:v2026.281.0939'
             ```
+
+            A consumer that wants a desktop or a browser composes those candies on top.
 
             A box declares no ports of its own — the composed candies publish them (openclaw
             18789, wayvnc 5900, chrome 9222/9224) and `charly config -p` remaps them at deploy
