@@ -1087,7 +1087,7 @@ openclaw-deploy-skill:
 
             ### Connecting to Existing Chrome
 
-            In a composed OpenClaw box (the family's own box), Chrome already runs as a supervisord service on port 9222. OpenClaw must connect to it rather than launching a new instance:
+            In a composed OpenClaw **desktop** box — one that composes `sway-desktop` and Chrome, which the family's own headless box does not — Chrome already runs as a supervisord service on port 9222. OpenClaw must connect to it rather than launching a new instance:
 
             ```bash
             openclaw config set browser.cdpUrl "http://127.0.0.1:9222"
