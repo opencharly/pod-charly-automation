@@ -922,19 +922,19 @@ openclaw-deploy-skill:
             ### Host Alias
 
             ```bash
-            charly alias add openclaw my-openclaw-box
+            charly alias add openclaw openclaw
             # Now: openclaw --help  (runs inside the container)
             ```
 
             ### Lifecycle
 
             ```bash
-            charly box build my-openclaw-box         # Build image
-            charly config my-openclaw-box        # Generate quadlet, daemon-reload
-            charly start my-openclaw-box         # Start via systemd
-            charly stop my-openclaw-box          # Stop
-            charly status my-openclaw-box        # Check systemd status
-            charly logs my-openclaw-box -f       # Follow container logs
+            charly box build openclaw         # Build image
+            charly config openclaw        # Generate quadlet, daemon-reload
+            charly start openclaw         # Start via systemd
+            charly stop openclaw          # Stop
+            charly status openclaw        # Check systemd status
+            charly logs openclaw -f       # Follow container logs
             ```
 
             ## Gateway Configuration
