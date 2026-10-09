@@ -98,7 +98,7 @@ agent-skill:
 
             - Expect phase/status events such as endpoint bootstrap, `waiting-for-prompt`, `prompt-ready`, running/reattached, settled, and exit.
             - Treat silence, malformed frames, EOF before ACK, cleanup failure, warnings, and unexpected duration as incidents.
-            - Use no sleep, polling loop, backoff, or arbitrary timed retry — per the project rulebook R4. Synchronize on process, tmux control, gRPC, terminal, and context events.
+            - Use no sleep, polling loop, backoff, or arbitrary timed retry — per the project rulebook R3. Synchronize on process, tmux control, gRPC, terminal, and context events.
             - Preserve stdout for structured command results and use stderr for provider/operation/target progress and actionable failures.
             - For implementation acceptance, run the complete unmodified disposable R10 bed with `charly check run <bed>` and use its per-step logs and summary.
 
@@ -1675,7 +1675,7 @@ tmux-skill:
             - Control disconnect detaches when persistence permits. Initial reattachment and sequence recovery use a structured resynchronization snapshot.
             - Normal zero exit or explicit close verifies server cleanup. Nonzero exit, malformed stream, evidence overflow, or cleanup failure creates an incident and performs no automatic restart.
             - Recovery requires a completed RCA, except an explicit emergency abort that still records the unresolved incident.
-            - Semantic readiness is driven by tmux control-output events. `waiting-for-prompt` and `prompt-ready` statuses make the boundary observable; no capture polling, sleeps, backoff, or timed retries — per R4, pace on observable state.
+            - Semantic readiness is driven by tmux control-output events. `waiting-for-prompt` and `prompt-ready` statuses make the boundary observable; no capture polling, sleeps, backoff, or timed retries — per R3, pace on observable state.
 
             ## Terminal agents
 
@@ -1816,7 +1816,7 @@ agent-control-operator-skill:
             2. Report endpoint-bootstrap and channel status from stderr/status frames.
             3. Preserve structured stdout, run IDs, sequence/ACK evidence, transcripts, exit status, and cleanup outcome.
             4. On any anomaly, stop. Record or identify the incident, collect evidence, complete a specific RCA, and require an explicit recovery decision. Never blindly rerun.
-            5. Never add sleeps or blind retries — per R4; pace on the observable state events named in `/charly-automation:agent`.
+            5. Never add sleeps or blind retries — per R3; pace on the observable state events named in `/charly-automation:agent`.
             6. Escalate to debugger attachment only after Charly-native evidence is captured and only against the exact blocked process. Do not broad-kill processes.
 
             An accessible target does not need Charly preinstalled. Verify that each deployment/SSH boundary keeps an equal/newer target Charly or uses the controller's versioned replicated path. Do not mutate PATH or install an untracked system package for transient control.
