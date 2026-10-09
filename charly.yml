@@ -906,15 +906,13 @@ openclaw-deploy-skill:
 
             A consumer that wants a desktop or a browser composes those candies on top.
 
-            A box declares no ports of its own — the composed candies publish them (openclaw
-            18789, wayvnc 5900, chrome 9222/9224) and `charly config -p` remaps them at deploy
-            time. The resulting box exposes:
+            A box declares no ports of its own — the composed candies publish them (the headless
+            family box exposes exactly one: the gateway on 18789) and `charly config -p` remaps
+            them at deploy time. The resulting box exposes:
 
             | Port | Service | Protocol |
             |------|---------|----------|
-            | 18789 | Gateway WebSocket + Control UI | HTTP |
-            | 5900 | VNC (wayvnc) | TCP |
-            | 9222 | Chrome DevTools | HTTP |
+            | 18789 | OpenClaw gateway + Control UI | HTTP |
 
             Tunnel config exposes all ports via Tailscale (`ports: all`). Platform: linux/amd64 only.
 
