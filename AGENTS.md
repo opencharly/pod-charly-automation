@@ -4,15 +4,20 @@ Standalone repo for the `charly-automation` concept candy — it ships no instal
 content and owns the automation family's `skill:` entities (the documentation
 for the charly automation surface: agent control plane, aliases, encrypted
 volumes, sidecars, tmux, udev, OpenClaw, Crabbox). The entities live in
-`charly.yml` at the repo root; `candy/plugin-marketplace` regenerates the
+`charly.yml` at the repo root and each skill's BODY lives beside it, in
+`.agents/skills/<name>/SKILL.md`; `candy/plugin-marketplace` regenerates the
 standalone opencharly/marketplace corpus from them.
 
 Canonical files:
 
 - `charly.yml` — the `charly-automation:` concept candy entity plus the family's
-  `skill:` entities (`agent-skill`, `alias-skill`, `enc-skill`,
-  `openclaw-deploy-skill`, `sidecar-skill`, `tmux-skill`, `udev-skill`,
-  `agent-control-operator-skill`, `crabbox-deploy-skill`).
+  entity nodes (`agent-skill`, `alias-skill`, `enc-skill`, `openclaw-deploy-skill`,
+  `sidecar-skill`, `tmux-skill`, `udev-skill`, `crabbox-deploy-skill`, each
+  carrying `name`/`family`/`owner`/`triggers` and no body, plus
+  `agent-control-operator-skill`, whose `type: agent` body is still inline
+  pending the agent-authored path).
+- `.agents/skills/<name>/SKILL.md` — the eight skill BODIES, one directory per
+  node's `name:`; the file is the source of record for the prose.
 - `.github/workflows/tag-on-merge.yml` — CalVer tag + `CHANGELOG/` on merge.
 - `CHANGELOG/` — per-CalVer history.
 - `README.md` — user overview only; never agent guidance.
@@ -45,9 +50,10 @@ Canonical files:
 
 ## Modify this repo
 
-- The `skill:` entities are the projected usage sources. Edit them here, never
-  the generated `SKILL.md` in the marketplace corpus; a corpus regeneration
-  (`charly marketplace generate`) projects them.
+- Edit a skill's `SKILL.md` under `.agents/skills/<name>/` for the prose, or its
+  node in `charly.yml` for the routing — never the generated `SKILL.md` in the
+  marketplace corpus; a corpus regeneration (`charly marketplace generate`)
+  projects both.
 - Keep each entity's `name` / `family` / `owner` fields and the projection path
   (`marketplace/automation/skills/<name>/`) consistent; a rename must sweep every
   `/charly-automation:<old>` cross-reference in the same change.
