@@ -4,8 +4,9 @@ The `charly-automation` family — the owning skill source for the charly
 automation surface.
 
 This is a **concept candy**: it ships no install content and owns the automation
-family's `skill:` entities. Each sibling `skill:` entity in `charly.yml` is
-projected by `candy/plugin-marketplace` into the standalone
+family's `skill:` entities. Each skill's body lives beside it, in
+`.agents/skills/<name>/SKILL.md`, and its node in `charly.yml` carries the
+routing metadata. Both are projected by `candy/plugin-marketplace` into the standalone
 [opencharly/marketplace](https://github.com/opencharly/marketplace) corpus as a
 `/charly-automation:<name>` page — the documentation for the automation
 commands, agents, sidecars, and encrypted volumes.
@@ -47,7 +48,11 @@ itself (the `/charly-tools:charly` candy), not by this repo.
 ## Layout
 
 - `charly.yml` — the `charly-automation:` concept candy entity plus the family's
-  `skill:` entities (`agent-skill`, `tmux-skill`, `sidecar-skill`, …).
+  entity nodes (`agent-skill`, `tmux-skill`, `sidecar-skill`, …), each carrying
+  the routing metadata. `agent-control-operator-skill` is a `type: agent` node
+  and still carries its body inline.
+- `.agents/skills/<name>/SKILL.md` — the eight skill bodies, one directory per
+  node's `name:`.
 - `.github/workflows/tag-on-merge.yml` — CalVer tag + `CHANGELOG/` on merge.
 - `CHANGELOG/` — per-CalVer history.
 - `README.md` — this user overview.
