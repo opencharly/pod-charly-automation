@@ -4,20 +4,24 @@ Standalone repo for the `charly-automation` concept candy — it ships no instal
 content and owns the automation family's `skill:` entities (the documentation
 for the charly automation surface: agent control plane, aliases, encrypted
 volumes, sidecars, tmux, udev, OpenClaw, Crabbox). The entities live in
-`charly.yml` at the repo root and each skill's BODY lives beside it, in
-`.agents/skills/<name>/SKILL.md`; `candy/plugin-marketplace` regenerates the
+`charly.yml` at the repo root and each entity's BODY lives beside it, in
+`.agents/skills/<name>/SKILL.md` for a skill and `.agents/agents/<name>.md` for
+an `agent`-type node; `candy/plugin-marketplace` regenerates the
 standalone opencharly/marketplace corpus from them.
 
 Canonical files:
 
 - `charly.yml` — the `charly-automation:` concept candy entity plus the family's
   entity nodes (`agent-skill`, `alias-skill`, `enc-skill`, `openclaw-deploy-skill`,
-  `sidecar-skill`, `tmux-skill`, `udev-skill`, `crabbox-deploy-skill`, each
-  carrying `name`/`family`/`owner`/`triggers` and no body, plus
-  `agent-control-operator-skill`, whose `type: agent` body is still inline
-  pending the agent-authored path).
+  `sidecar-skill`, `tmux-skill`, `udev-skill`, `crabbox-deploy-skill` and
+  `agent-control-operator-skill`), each carrying only routing metadata —
+  `name`/`family`/`owner`, with `triggers` where one is authored and
+  `type`/`model` on the one `agent`-type node.
 - `.agents/skills/<name>/SKILL.md` — the eight skill BODIES, one directory per
   node's `name:`; the file is the source of record for the prose.
+- `.agents/agents/<name>.md` — the body of the one `agent`-type node
+  (`agent-control-operator`): one file, no entry directory and no `references/`
+  half, because a sub-agent definition is not a skill.
 - `.github/workflows/tag-on-merge.yml` — CalVer tag + `CHANGELOG/` on merge.
 - `CHANGELOG/` — per-CalVer history.
 - `README.md` — user overview only; never agent guidance.
@@ -37,9 +41,14 @@ Canonical files:
 ## Build / validate / test
 
 - `charly box validate` at the repo root — the structural check: the manifest
-  must parse and validate at the installed charly. It is green (checked 1 candy,
-  7 distros, 7 builders; 0 warnings, 0 errors), so it is the gate a docs-only
-  change runs.
+  must parse and validate. The routing-only `skill:` shape these nodes use is
+  younger than some binaries: a charly built from an older source rejects it with
+  `#SkillInput.description: incomplete value !=""`. Validate with a `charly` whose
+  source is at or past that shape and never with the shared host install — confirm
+  it with `charly version`, and pass `CHARLY_PLUGIN_ONLY=1` so a worktree build does
+  not scan the packaged plugins under `/usr/lib/charly/plugins`. Its
+  `7 distros, 7 builders` line is the binary's embedded build vocabulary, not this
+  repo's — this repo contributes `1 candy`.
 - The merge gate is the **org-wide** `charly/pr-validator` (required check
   `validate / validate`, defined in `opencharly/.github`); this repo has **no**
   per-repo candy gate. Its only workflow file is
@@ -50,13 +59,16 @@ Canonical files:
 
 ## Modify this repo
 
-- Edit a skill's `SKILL.md` under `.agents/skills/<name>/` for the prose, or its
-  node in `charly.yml` for the routing — never the generated `SKILL.md` in the
+- Edit a skill's `SKILL.md` under `.agents/skills/<name>/`, or the one agent
+  definition's file under `.agents/agents/<name>.md`, for the prose — or the
+  node's routing in `charly.yml`. Never edit the generated file in the
   marketplace corpus; a corpus regeneration (`charly marketplace generate`)
   projects both.
 - Keep each entity's `name` / `family` / `owner` fields and the projection path
-  (`marketplace/automation/skills/<name>/`) consistent; a rename must sweep every
-  `/charly-automation:<old>` cross-reference in the same change.
+  (`marketplace/automation/skills/<name>/` for a skill,
+  `marketplace/automation/agents/<name>.md` for the `agent`-type node)
+  consistent; a rename must sweep every `/charly-automation:<old>`
+  cross-reference in the same change.
 - Keep the concept candy's `plan:` no-op; it exists only to carry the entities.
 
 ## Landing
