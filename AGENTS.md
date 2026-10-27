@@ -1,75 +1,51 @@
 # AGENTS.md — pod-charly-automation
 
-Standalone repo for the `charly-automation` concept candy — it ships no install
-content and owns the automation family's `skill:` entities (the documentation
-for the charly automation surface: agent control plane, aliases, encrypted
-volumes, sidecars, tmux, udev, OpenClaw, Crabbox). The entities live in
-`charly.yml` at the repo root and each entity's BODY lives beside it, in
-`.agents/skills/<name>/SKILL.md` for a skill and `.agents/agents/<name>.md` for
-an `agent`-type node; `candy/plugin-marketplace` regenerates the
-standalone opencharly/marketplace corpus from them.
+**This repo is RETIRED.** It authors no skill and no agent definition any more: all nine
+bodies it carried have moved beside the command, plugin, image or contract each of them
+documents (opencharly/opencharly#600, #628), and every one is byte-identical at its
+destination. It is archived once its drain has merged and been tagged.
 
 Canonical files:
 
-- `charly.yml` — the `charly-automation:` concept candy entity plus the family's
-  entity nodes (`agent-skill`, `alias-skill`, `enc-skill`, `openclaw-deploy-skill`,
-  `sidecar-skill`, `tmux-skill`, `udev-skill`, `crabbox-deploy-skill` and
-  `agent-control-operator-skill`), each carrying only routing metadata —
-  `name`/`family`/`owner`, with `triggers` where one is authored and
-  `type`/`model` on the one `agent`-type node.
-- `.agents/skills/<name>/SKILL.md` — the eight skill BODIES, one directory per
-  node's `name:`; the file is the source of record for the prose.
-- `.agents/agents/<name>.md` — the body of the one `agent`-type node
-  (`agent-control-operator`): one file, no entry directory and no `references/`
-  half, because a sub-agent definition is not a skill.
+- `charly.yml` — the `charly-automation:` candy node and nothing else. It is a real
+  `candy:` because a project needs one; its `plan:` is a `true` no-op `run:` step plus a
+  `true` no-op `check:` step, and **neither is an assertion** — there is no body left here
+  for the body-existence gate to resolve.
 - `.github/workflows/tag-on-merge.yml` — CalVer tag + `CHANGELOG/` on merge.
 - `CHANGELOG/` — per-CalVer history.
 - `README.md` — user overview only; never agent guidance.
 
-## Load these skills first (R0)
+## Where the prose went (the destination map)
 
-- The owning skill for the surface you are changing, e.g.
-  `/charly-automation:agent` (the agent control plane), `/charly-automation:tmux`,
-  `/charly-automation:alias`, `/charly-automation:enc` (encrypted volumes),
-  `/charly-automation:sidecar`, `/charly-automation:udev`,
-  `/charly-automation:openclaw-deploy`, `/charly-automation:crabbox-deploy`.
-  Load the one whose `skill:` entity you are editing.
-- `/charly-internals:skills` — the skill maintenance rules (author on the
-  entity, regenerate the corpus, never hand-edit a projected `SKILL.md`).
-- `/charly-internals:git-workflow` — before any git/PR action.
+Measured as git blobs: this repo's pre-drain `main` versus each destination's `origin/main`.
+Every row compares equal, and a `==` beside a blob means the bytes are identical — the move
+relocated the AUTHORITY over a body, it did not rewrite one.
 
-## Build / validate / test
+| entity | destination repo | path | blob |
+|---|---|---|---|
+| `agent` | `opencharly/plugin-agent` | `.agents/skills/agent/SKILL.md` | `feca7d69d6cb` |
+| `alias` | `opencharly/plugin-alias` | `.agents/skills/alias/SKILL.md` | `540ec9ee7f65` |
+| `enc` | `opencharly/plugin-enc` | `.agents/skills/enc/SKILL.md` | `9f5ef6ee33be` |
+| `openclaw-deploy` | `opencharly/layer-openclaw` | `.agents/skills/openclaw-deploy/SKILL.md` | `936873aab588` |
+| `sidecar` | `opencharly/plugin-deploy-pod` | `.agents/skills/sidecar/SKILL.md` | `1dfe73e836fb` |
+| `tmux` | `opencharly/plugin-tmux` | `.agents/skills/tmux/SKILL.md` | `8a0ad21fe458` |
+| `udev` | `opencharly/plugin-udev` | `.agents/skills/udev/SKILL.md` | `388c743e0bf4` |
+| `crabbox-deploy` | `opencharly/distro-cachyos` | `.agents/skills/crabbox-deploy/SKILL.md` | `612db8ebebb1` |
+| `agent-control-operator` (`type: agent`) | `opencharly/plugin-agent` | `.agents/agents/agent-control-operator.md` | `78df6f61ee76` |
 
-- `charly box validate` at the repo root — the structural check: the manifest
-  must parse and validate. The routing-only `skill:` shape these nodes use is
-  younger than some binaries: a charly built from an older source rejects it with
-  `#SkillInput.description: incomplete value !=""`. Validate with a `charly` whose
-  source is at or past that shape and never with the shared host install — confirm
-  it with `charly version`, and pass `CHARLY_PLUGIN_ONLY=1` so a worktree build does
-  not scan the packaged plugins under `/usr/lib/charly/plugins`. Its
-  `7 distros, 7 builders` line is the binary's embedded build vocabulary, not this
-  repo's — this repo contributes `1 candy`.
-- The merge gate is the **org-wide** `charly/pr-validator` (required check
-  `validate / validate`, defined in `opencharly/.github`); this repo has **no**
-  per-repo candy gate. Its only workflow file is
-  `.github/workflows/tag-on-merge.yml`.
-- The candy is documentation-only: its `plan:` is a `true` no-op plus a `true`
-  `check:` that the skill entities are present and generated into the
-  marketplace. There is no live bed.
+`crabbox-deploy` was the one destination a GATE could not decide: its own prose names four
+repos (opencharly/opencharly#628), so the operator settled it on `distro-cachyos` — the repo
+holding the two images it deploys, both disposable beds it runs and its plan file. Every row
+above was derived from the entity's own prose, never from its name.
 
-## Modify this repo
+`family:` was kept unchanged on every move, so every existing `/charly-automation:<name>`
+address still resolves — from the repo that now authors it.
 
-- Edit a skill's `SKILL.md` under `.agents/skills/<name>/`, or the one agent
-  definition's file under `.agents/agents/<name>.md`, for the prose — or the
-  node's routing in `charly.yml`. Never edit the generated file in the
-  marketplace corpus; a corpus regeneration (`charly marketplace generate`)
-  projects both.
-- Keep each entity's `name` / `family` / `owner` fields and the projection path
-  (`marketplace/automation/skills/<name>/` for a skill,
-  `marketplace/automation/agents/<name>.md` for the `agent`-type node)
-  consistent; a rename must sweep every `/charly-automation:<old>`
-  cross-reference in the same change.
-- Keep the concept candy's `plan:` no-op; it exists only to carry the entities.
+## What still lives here
+
+Only the candy node, the tag workflow and history. Nothing in this repo is a source of
+guidance any more, and no consumer should compose it for its prose: compose the repo that
+now authors the skill you need.
 
 ## Landing
 

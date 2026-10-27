@@ -1,88 +1,25 @@
 charly-automation:
     candy:
         description: |-
-            Concept candy owning the charly-automation skills (tmux/alias/udev/encryption/sidecar/…). Owns its family's `skill:` kind entities (sibling nodes in this file) — the
-            the plugins→candies migration; candy/plugin-marketplace regenerates the marketplace
-            corpus (the standalone opencharly/marketplace repo) from them.
+            RETIRED concept candy. It owns no `skill:` and no `agent` entity any more: the
+            eight skill bodies and the one sub-agent definition it carried have moved beside
+            the command, plugin and image each of them documents (opencharly/opencharly#600,
+            #628), and every body is byte-identical at its destination. This repo authors no
+            prose.
+
+            It stays a real `candy:` node because a project needs one, and it carries a `true`
+            no-op `run:` step and a `true` no-op `check:` step. NEITHER is an assertion: there
+            is no body left here for the body-existence gate to resolve, so a step that read
+            `true` would assert nothing about anything. `charly box validate` proves the drain
+            instead — a node re-added here with no body is red, and it names the node and the
+            owning candy.
         plan:
-            - run: this documentation-only candy ships no install content (it carries the family's skill/hook/marketplace entities); validate-satisfying no-op
+            - run: this retired concept candy ships no install content and owns no entity — a no-op, not a claim
               command: "true"
               context:
                 - build
-            - check: the automation concept candy's skill entities are present and generated into the marketplace's automation/skills
-              id: charly-automation-present
+            - check: no-op — the candy owns no `skill:` or `agent` node any more, so there is no body to resolve and nothing this step could assert
+              id: charly-automation-retired-no-op
               context:
                 - build
               command: "true"
-
-agent-skill:
-    skill:
-        name: agent
-        family: automation
-        owner: charly-automation
-        triggers:
-            - "`charly agent` / agent control plane / sessions / runs / terminal channels / `charly tui` / MCP routing / agent target routing"
-
-alias-skill:
-    skill:
-        name: alias
-        family: automation
-        owner: charly-automation
-        triggers:
-            - "host command alias / `charly alias` / wrapper script in a container"
-
-enc-skill:
-    skill:
-        name: enc
-        family: automation
-        owner: charly-automation
-        triggers:
-            - "`charly config` encrypted volumes / gocryptfs / the `--encrypt` flag / config mount-unmount-status-passwd"
-
-openclaw-deploy-skill:
-    skill:
-        name: openclaw-deploy
-        family: automation
-        owner: charly-automation
-        triggers:
-            - "OpenClaw gateway / the OpenClaw family's candies / model auth / browser integration / channel setup"
-
-sidecar-skill:
-    skill:
-        name: sidecar
-        family: automation
-        owner: charly-automation
-        triggers:
-            - "sidecars via `charly config` / Tailscale exit nodes / `env_accept` / `env_require` / pod networking"
-
-tmux-skill:
-    skill:
-        name: tmux
-        family: automation
-        owner: charly-automation
-        triggers:
-            - "`charly tmux` sessions / terminal channels / snapshot / transcript / detached-reattach / gRPC terminal"
-
-udev-skill:
-    skill:
-        name: udev
-        family: automation
-        owner: charly-automation
-        triggers:
-            - "`charly udev` / GPU device access rules / container GPU troubleshooting"
-
-agent-control-operator-skill:
-    skill:
-        type: agent
-        name: agent-control-operator
-        family: automation
-        owner: charly-automation
-        model: inherit
-crabbox-deploy-skill:
-    skill:
-        name: crabbox-deploy
-        family: automation
-        owner: charly-automation
-        triggers:
-            - "crabbox CLI / local coordinator / remote-execution broker / composing the crabbox candies"
-
